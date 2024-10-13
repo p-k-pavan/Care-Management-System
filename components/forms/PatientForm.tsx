@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 
+import { createUser } from "@/lib/actions/patient.actions";
+
 
 
 export enum FormFieldType {
@@ -36,27 +38,30 @@ const PatientForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof UserFormValidation>) {
+  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+    console.log("Form submitted with values:", values);  // Log here
     setIsLoading(true);
-
+    
     try {
-      // const user = {
-      //   name: values.name,
-      //   email: values.email,
-      //   phone: values.phone,
-      // };
-
-      // const newUser = await createUser(user);
-
-      // if (newUser) {
-      //   router.push(`/patients/${newUser.$id}/register`);
-      // }
+      const user = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+      };
+  
+      const newUser = await createUser(user);
+  
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Form submission error:", error);  // Log here
     }
-
+  
     setIsLoading(false);
-  }
+  };
+  
+
 
   return (
     <Form {...form}>
@@ -66,17 +71,18 @@ const PatientForm = () => {
           <p className="text-dark-700">Schedule your first appointment.</p>
         </section>
 
-        <CustomFormField 
+        <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
-          name="username"
+          name="name"
           label="Full Name"
           placeholder="John Doe"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
 
-        <CustomFormField 
+
+        <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
           name="email"
@@ -86,7 +92,7 @@ const PatientForm = () => {
           iconAlt="email"
         />
 
-        <CustomFormField 
+        <CustomFormField
           control={form.control}
           fieldType={FormFieldType.PHONE_INPUT}
           name="phone"
