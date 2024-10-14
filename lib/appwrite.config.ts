@@ -9,6 +9,7 @@ export const DOCTOR_COLLECTION_ID = process.env.DOCTOR_COLLECTION_ID;
 export const APPOINTMENT_COLLECTION_ID = process.env.APPOINTMENT_COLLECTION_ID;
 export const NEXT_PUBLIC_BUCKET_ID = process.env.NEXT_PUBLIC_BUCKET_ID;
 
+
 const client = new sdk.Client();
 
 client
