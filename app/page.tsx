@@ -2,10 +2,18 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
+import PassKeyModel from "@/components/PassKeyModel"
 
-export default function Home() {
+export default function Home({
+  searchParams
+}:{
+  SearchParamProps
+}) {
+
+  const isAdmin = searchParams.admin === 'true'
   return (
     <div className="flex h-screen max-h-screen">
+      {isAdmin && <PassKeyModel />}
     <section className="remove-srollbar container">
       <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
           <Image src="/assets/icons/logo-full.svg" alt="Logo"
