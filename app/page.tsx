@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex h-screen max-h-screen">
-      <section className="remove-srollbar container my-auto">
-        <div className="sub-container max-w-[496px]">
+    <section className="remove-srollbar container">
+      <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
           <Image src="/assets/icons/logo-full.svg" alt="Logo"
           height={1000}
           width={10000}
