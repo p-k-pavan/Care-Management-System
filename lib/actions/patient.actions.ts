@@ -28,7 +28,6 @@ export const createUser = async (user: CreateUserParams) => {
   
       return parseStringify(newuser);
     } catch (error: any) {
-      // Check existing user
       if (error && error?.code === 409) {
         const existingUser = await users.list([
           Query.equal("email", [user.email]),
@@ -54,7 +53,6 @@ export const getUser = async (userId : string) => {
 
 export const registerPatient = async (
   { identificationDocument, ...patient }: RegisterUserParams,
-  userId: string
 ) => {
   try {
     let file;

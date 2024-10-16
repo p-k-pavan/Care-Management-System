@@ -1,8 +1,6 @@
 import Image from "next/image";
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,7 +16,6 @@ import ReactDatePicker from "react-datepicker";
 import {
   Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -29,7 +26,6 @@ import { Checkbox } from "./ui/checkbox";
 
 interface CustomProps {
   control:Control<any>,
-  fieldType:FormFieldType,
   name:string,
   label?:string,
   placeholder?:string,
@@ -44,7 +40,7 @@ interface CustomProps {
 }
 
 const RenderField = ({field,props}:{field:any; props:CustomProps}) => {
-  const {control,fieldType,name,label,placeholder,iconSrc,iconAlt} = props;  
+  const {fieldType,placeholder,iconSrc,iconAlt} = props;  
   switch (fieldType){
     case FormFieldType.INPUT: 
       return (
@@ -118,15 +114,22 @@ const RenderField = ({field,props}:{field:any; props:CustomProps}) => {
               className="ml-2"
             />
             <FormControl>
-              <ReactDatePicker
-                showTimeSelect={props.showTimeSelect ?? false}
-                selected={field.value}
-                onChange={(date:Date)=>field.onChange(date)}
-                timeInputLabel="Time:"
-                dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
-                wrapperClassName="date-picker"
-              />
-            </FormControl>
+  <ReactDatePicker
+    showTimeSelect={props.showTimeSelect ?? false}
+    selected={field.value}
+    onChange={(date: Date | null) => {
+      if (date) {
+        field.onChange(date);
+      } else {
+        field.onChange(null);
+      }
+    }}
+    timeInputLabel="Time:"
+    dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
+    wrapperClassName="date-picker"
+  />
+</FormControl>
+
           </div>
         )
         case FormFieldType.SELECT:

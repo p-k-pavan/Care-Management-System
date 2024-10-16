@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button"
 import AppointmentForm from "@/components/forms/AppointmentForm";
-import Link from "next/link";
 import { getPatient } from "@/lib/actions/patient.actions";
 
 const NewAppointment = async({ params: { userId } }: SearchParamProps) => {

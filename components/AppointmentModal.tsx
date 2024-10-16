@@ -22,15 +22,11 @@ export const AppointmentModal = ({
     userId,
     appointment,
     type,
-    title,
-  description
 }:{
     patientId:string;
     userId:string;
     appointment?:Appointment;
     type:"schedule" | "cancel"
-    title: string;
-  description: string;
 }) => {
     const [open,setOpen] = useState(false);
     return(
